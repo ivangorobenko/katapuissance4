@@ -3,21 +3,43 @@ const Grille = require('../app/grille.js');
 
 describe('Puissance 4', () => {
 
-    const grille = new Grille()
-
     context('L\'état de la cellule', () => {
+        let grille
+        beforeEach(() => {
+            grille = new Grille()
+        })
         it('la première ligne de la première colonne doit être vide si aucun joueur n\'a joué dans cette cellule', () => {
             expect(grille.getStateOfTheCell(1, 1)).to.equal("-")
         })
         it('la première ligne de la première colonne doit avoir "X" si un joueur a mis un jeton X dans cette cellule', () => {
-            grille.addToken("X",1);
+            grille.addToken("X", 1);
             expect(grille.getStateOfTheCell(1, 1)).to.equal("X")
         })
-        it('la première ligne de la première colonne doit avoir "X" et la deuxième ligne de la première colonne si ', () => {
-            grille.addToken("X",1);
-            grille.addToken("0",1);
+        it('la première ligne de la première colonne doit avoir "O" si un joueur a mis un jeton O dans cette cellule', () => {
+            grille.addToken("O", 1);
+            expect(grille.getStateOfTheCell(1, 1)).to.equal("O")
+        })
+        it('la première ligne de la première colonne doit avoir "X" et la deuxième ligne de la première doit avoir "O" si on ajoute les jetons "X" et "O" dans la première colonne', () => {
+            grille.addToken("X", 1);
+            grille.addToken("O", 1);
             expect(grille.getStateOfTheCell(1, 1)).to.equal("X")
-            expect(grille.getStateOfTheCell(1, 2)).to.equal("0")
+            expect(grille.getStateOfTheCell(2, 1)).to.equal("O")
+        })
+        it('la première ligne de la première colonne doit avoir "X" et la première ligne de la deuxième colonne doit avoir "O" si on ajoute les jetons "X" et "O" dans la première et la deuxième colonnes', () => {
+            grille.addToken("X", 1);
+            grille.addToken("O", 2);
+            expect(grille.getStateOfTheCell(1, 1)).to.equal("X")
+            expect(grille.getStateOfTheCell(1, 2)).to.equal("O")
+        })
+        it.skip('ne doit pas laisser ajouter un jeton dans une colonne pleine', () => {
+            grille.addToken("O", 1);
+            grille.addToken("O", 1);
+            grille.addToken("O", 1);
+            grille.addToken("O", 1);
+            grille.addToken("O", 1);
+            grille.addToken("O", 1);
+
+            expect(grille.addToken("O", 1)).to.throw('La colonne est pleine');
         })
     })
 })
