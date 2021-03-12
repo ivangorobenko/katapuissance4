@@ -1,16 +1,23 @@
 const expect = require('chai').expect;
-const Project = require('../app/project.js');
+const Grille = require('../app/grille.js');
 
 describe('Puissance 4', () => {
 
-    const project = new Project()
+    const grille = new Grille()
 
-    context('L\état de la cellule', () => {
+    context('L\'état de la cellule', () => {
         it('la première ligne de la première colonne doit être vide si aucun joueur n\'a joué dans cette cellule', () => {
-            expect(project.getStateOfTheCell(1, 1)).to.equal("-")
+            expect(grille.getStateOfTheCell(1, 1)).to.equal("-")
         })
         it('la première ligne de la première colonne doit avoir "X" si un joueur a mis un jeton X dans cette cellule', () => {
-            expect(project.getStateOfTheCell(1, 1)).to.equal("X")
+            grille.addToken("X",1);
+            expect(grille.getStateOfTheCell(1, 1)).to.equal("X")
+        })
+        it('la première ligne de la première colonne doit avoir "X" et la deuxième ligne de la première colonne si ', () => {
+            grille.addToken("X",1);
+            grille.addToken("0",1);
+            expect(grille.getStateOfTheCell(1, 1)).to.equal("X")
+            expect(grille.getStateOfTheCell(1, 2)).to.equal("0")
         })
     })
 })
