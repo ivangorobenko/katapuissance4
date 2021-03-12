@@ -1,24 +1,13 @@
 class Project {
 
-    constructor(){
+    constructor() {
+        this.grid = [];
     }
 
-    testFunction(){
-        this.mockFunction()
-        return this.stubFunction()
+    getStateOfTheCell(lineNm,columnNm) {
+        return "-"
     }
 
-    mockFunction(){
-        return -1;
-    }
-
-    stubFunction(){
-        return 1
-    }
-
-    exceptionFunction(){
-         throw new Error('Exception Catch');
-    }
 
 }
 
